@@ -31,3 +31,10 @@ export const uploadFile = (req,res) =>{
         res.status(300).send("Error al subir el archivo")
     }
 }
+
+// export const listFiles
+
+// export const deleteFiles
+
+export { upload };
+

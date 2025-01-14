@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyect Upload FILES</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!--Esto solo para uso rápido, la forma correcta es instalarlo con npm-->
+    <script type="module" src="./scripts/main.js" defer></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-xl text-blue-500">Aplicación UPLOAD</h1>
+        <form id="uploadForm" class="flex flex-col gap-4" enctype="multipart/form-data">
+            <input 
+            class="border border-gray-300 rounded-lg p-2" 
+            type="file" 
+            name="file" 
+            required>
+            <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600">Subir archivo</button>
+        </form>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Lista de ficheros</h2>
+        <ul id="findList" class="space-y-2">
+
+        </ul>
+    </div>
+</body>
+</html>

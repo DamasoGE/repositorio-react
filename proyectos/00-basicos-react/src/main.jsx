@@ -5,7 +5,8 @@ import App from './App.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // El strictmode repite una segunda vez la monta de los componentes para asegurar
+  // <StrictMode> 
     <App />
-  </StrictMode>,
+  // </StrictMode>,
 )

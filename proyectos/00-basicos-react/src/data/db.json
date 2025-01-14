@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Clean Code",
+    "price": 35.99,
+    "tag": ["Java", "Best Practices", "Software Development"],
+    "img": "https://example.com/images/clean_code.jpg"
+  },
+  {
+    "id": 2,
+    "name": "The Pragmatic Programmer",
+    "price": 40.50,
+    "tag": ["General Programming", "Software Development"],
+    "img": "https://example.com/images/pragmatic_programmer.jpg"
+  },
+  {
+    "id": 3,
+    "name": "JavaScript: The Good Parts",
+    "price": 25.00,
+    "tag": ["JavaScript", "Web Development"],
+    "img": "https://example.com/images/js_good_parts.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Python Crash Course",
+    "price": 29.99,
+    "tag": ["Python", "Beginner"],
+    "img": "https://example.com/images/python_crash_course.jpg"
+  },
+  {
+    "id": 5,
+    "name": "You Don't Know JS: Scope & Closures",
+    "price": 22.99,
+    "tag": ["JavaScript", "Advanced"],
+    "img": "https://example.com/images/you_dont_know_js.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "price": 45.99,
+    "tag": ["General Programming", "Object-Oriented"],
+    "img": "https://example.com/images/design_patterns.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Eloquent JavaScript",
+    "price": 30.00,
+    "tag": ["JavaScript", "Web Development", "Best Practices"],
+    "img": "https://example.com/images/eloquent_js.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Learning React",
+    "price": 28.99,
+    "tag": ["JavaScript", "React", "Frontend"],
+    "img": "https://example.com/images/learning_react.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Effective Java",
+    "price": 42.99,
+    "tag": ["Java", "Advanced", "Best Practices"],
+    "img": "https://example.com/images/effective_java.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Fluent Python",
+    "price": 37.50,
+    "tag": ["Python", "Advanced"],
+    "img": "https://example.com/images/fluent_python.jpg"
+  }
+]

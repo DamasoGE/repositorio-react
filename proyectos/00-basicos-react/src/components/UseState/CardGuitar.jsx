@@ -8,6 +8,7 @@ const CardGuitar = ({ guitar }) => {
       key={name}
       className="bg-gray-100 border p-4 mt-4 rounded-lg shadow-md flex items-center"
     >
+ 
       <img
         src={guitarsolid}
         alt={name}
