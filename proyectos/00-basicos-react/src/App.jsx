@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div className="mx-auto bg-gray-200">
-      <div className="text-3xl font-bold underline">Hola mundo!!!</div>
+      {/* <div className="text-3xl font-bold underline">Hola mundo!!!</div> */}
       <hr className="mt-10" />
       <ProductList />
       {/* <Timer /> */}
