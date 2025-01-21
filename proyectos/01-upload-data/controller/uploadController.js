@@ -24,7 +24,6 @@ export const uploadFile = (req,res) =>{
         if(!req.file){
             return res.status(400).send("Por favor suba un fichero");
         }
-        
         res.status(200).send("Archivo subido correctamente");
     } catch (error) {
         //res.status(300).json({ message: error.message}); //UNA FORMA
