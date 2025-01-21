@@ -67,9 +67,8 @@ uploadForm.addEventListener("submit", async (event) => {
 
 async function deleteFile(file){ //hay que hacerlo
 
-    const response = await fetch("/uploads", {
-        method: "DELETE",
-        body: file
+    const response = await fetch(`/uploads/${file}`, {
+        method: "DELETE"
     });
 
 }
