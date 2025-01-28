@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom"
 import { ROUTES } from "../routes/paths"
-import { useState } from "react"
 
 const Navbar = () => {
 
-  const [isActive, setIsActive] = useState("")
+
 
   return (
     <nav className="bg-gradient-to-r from-rose-500 to-pink-500 shadow-lg">

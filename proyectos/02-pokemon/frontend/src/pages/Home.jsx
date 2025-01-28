@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { usePokemon } from "../context/pokemonContext";
+import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { favorites, addToFavorites } = usePokemon();
 
   useEffect(() => {
     fetchPokemons()
@@ -37,7 +41,7 @@ const Home = () => {
   }
 
   if(isLoading) {
-    return <div> Loading...</div>
+    return <Spinner></Spinner>
   }
 
 
@@ -59,8 +63,10 @@ const Home = () => {
               </h2>
               {/* Aqui van los botones */}
               <div className="flex justify-center space-x-2 mt-4">
+
                 <button 
                 className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-800"
+                onClick={()=> addToFavorites(pokemon)}
                 //onClick={han} aqui llamare a la funcion del contexto de favoritos
                 >
                   Añadir a Favoritos

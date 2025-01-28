@@ -19,10 +19,10 @@ const SearchPage = () => {
       console.log(data);
       navigate(`/search/${search.toLocaleLowerCase()}`)
     } catch (error) {
-      toast.error("Pokemon no encontrado", {
+      toast.error("Pokemon no encontrado", error, {
         style: {
-          background: "blue",
-          color: "white"
+          background: "white",
+          color: "black"
         }
       });
     }

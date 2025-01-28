@@ -1,7 +1,71 @@
+import { useLoaderData, useNavigate } from "react-router-dom"
+import { usePokemon } from "../context/pokemonContext";
 
 const PokemonDetailPage = () => {
+
+  const pokemon = useLoaderData();
+
+  const { addToFavorites } = usePokemon();
+
+
+  //navegación programática
+  const navigate = useNavigate();
+
   return (
-    <div>PokemonDetailPage</div>
+    <div className="container mx-auto p-4">
+      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <button 
+          className="mb-4 text-blue-800 hover:underline"
+          onClick={()=>navigate(-1)}>
+          Volver
+        </button>
+        <img 
+        className="w-48 h-48 mx-auto"
+        src={pokemon.sprites.other.dream_world.front_default} 
+        alt={pokemon.name} />
+        <h1
+        className="text-3xl font-bold text-center capitalize mb-4"
+        >
+          {pokemon.name}
+        </h1>
+
+        <button 
+          className="text-xl w-full mt-2 mb-2 text-white p-2 bg-blue-500 hover:bg-blue-800 rounded-lg"
+          onClick={()=> addToFavorites(pokemon)}
+        >
+          Agregar a favoritos
+        </button>
+
+        <div className="grid grid-cols-2 gap-6">
+
+          <div>
+            <h2 className="text-2xl text-rose-400 font-semibold mb-2">Estadisticas</h2>
+              {pokemon.stats.map((stat)=>(
+                <div key={stat.stat.name}>
+                  <span className="text-xl font-bold capitalize">
+                    {stat.stat.name}: {stat.base_stat}
+                  </span>
+                </div>
+              )
+              )}
+          </div>
+
+          <div>
+          <h2 className="text-2xl text-rose-400 font-semibold mb-2">Tipos</h2>
+            {pokemon.types.map((type)=>(
+                  <div key={type.type.name}>
+                    <span className="text-xl font-bold capitalize">
+                      {type.type.name}
+                    </span>
+                  </div>
+                )
+                )}
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   )
 }
 
