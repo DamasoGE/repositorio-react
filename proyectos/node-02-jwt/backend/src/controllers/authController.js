@@ -1,21 +1,35 @@
+import User from "../models/User.js";
+import generateToken from "../utils/generateToken.js";
 
+export const register = async (req, res) => {
+  const { username, password, role } = req.body;
+  try {
+    const user = new User({ username, password, role });
+    await user.save();
+    res.status(201).json({ message: "Usuario registrado" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-//funcion par acontrolar de forma asincrona los middleware de autentificacion
+export const login = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(401).json({ error: "Credenciales inválidas" });
+    }
 
-//fn->funcion controladora
-//retorna una funcion de tipo middleware
-//Promise.resolve asegura que se resuelva la promesa.
+    // Comparar contraseñas usando el método matchPassword
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Credenciales inválidas" });
+    }
 
-const cathAsync = (fn) => (req,res,next) =>{
-    Promise.resolve(fn(req,res,next)).catch(next);
-}
-
-//función para extraer los datos (email y password) del body de la petición
-export const register = cathAsync(async(req,res)=>{
-    //destructuring del body para sacar email y password
-    const { email, password } = req.body;
-    //validamos si el email y el password estan presentes
-    await AuthService.register(email, password); //estará en la carpeta services
-    //retornamos un mensaje de exito
-    res.status(201).json({message: "Usuario registrado con éxito"});
-})
+    // Generar token JWT
+    const token = generateToken(user._id, user.role);
+    res.json({ token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};

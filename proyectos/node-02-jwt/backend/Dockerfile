@@ -1,13 +1,20 @@
-FROM node:21-alpine
-# Creamos el directorio
+# Usar una imagen base de Node.js
+FROM node:23-alpine
+
+# Crear el directorio de la aplicación
 WORKDIR /usr/src/app
-# Copiamos los archivos package.json
+
+# Copiar el package.json y package-lock.json
 COPY package*.json ./
-# instalamos las dependencias
+
+# Instalar las dependencias
 RUN npm install
-# copiamos el resto de archivos
+
+# Copiar el resto del código de la aplicación
 COPY . .
-# exponemos el puerto 3000
-EXPOSE 3000
-# corremos la aplicación
-CMD ["node", "src/server.js"]
+
+# Exponer el puerto en el que corre la aplicación
+EXPOSE 4000
+
+# Comando para ejecutar la aplicación
+CMD ["npm", "start"]

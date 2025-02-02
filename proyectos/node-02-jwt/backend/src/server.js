@@ -1,35 +1,30 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import authRoutes from "./routes/authRoutes.js";
 
-//cargamos las variables de entorno
+// Cargar variables de entorno
 dotenv.config();
 
-const app=express();
+// Crear la aplicación Express
+const app = express();
 
-//aplicamos las middlewares CORS Y parse de JSON
+// Middleware para permitir CORS
 app.use(cors());
+
+// Middleware para parsear JSON
 app.use(express.json());
 
-//Conexion con la base de datos
+// Conectar a MongoDB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("Conectado a MongoDB"))
+  .catch((err) => console.error("Error conectando a MongoDB:", err));
 
-//rutas
-//app.use("/auth", xxxx)
-//app.use("/user", xxxx)
+// Rutas de autenticación
+app.use("/api/auth", authRoutes);
 
-//gestionar los errores
-app.use((err,req,res,next) => {
-    //registrar un error en el debugging
-    console.error(err.stack); // ¿stack?
-
-    res
-        .status(500)
-        .json({ mensaje: err.mensaje || "Error interno en el servidor"});
-})
-
-//Iniciar el servidor
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, ()=>{
-    console.log(`Servidor iniciado en puerto ${PORT}`)
-})
+// Iniciar el servidor
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));

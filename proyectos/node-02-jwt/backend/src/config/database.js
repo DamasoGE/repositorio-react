@@ -9,3 +9,5 @@ export const connectDB = async () =>{
         process.exit(1); //detener la app con codigo de error distinto de 0
     }
 }
+
+export default connectDB;
