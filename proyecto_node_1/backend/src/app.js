@@ -1,7 +1,6 @@
 import express from 'express';
 import pokemonRoutes from './routes/pokemonRoutes.js'
 import { ENDPOINT, PORT } from './config/config.js';
-import cors from 'cors'; 
 import { fetchAllDataPokemons } from './utils/fetchingPokemon.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -20,8 +19,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 //expresamos el middleware para que nuestro servidor pueda entender json.
 app.use(express.json());
 
-
-app.use(cors());
 
 const pokemonDB = await fetchAllDataPokemons();
 
