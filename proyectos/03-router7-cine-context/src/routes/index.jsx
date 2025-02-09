@@ -28,18 +28,18 @@ export const router = createBrowserRouter([
                 path: ROUTES.MOVIEDETAILS,
                 element: <MovieDetails />
             },
-            {
-                path: ROUTES.SEARCH,
-                element: <Search />
-            },
-            {
-                path: ROUTES.REVIEWS,
-                element: <Reviews />
-            },
-            {
-                path: ROUTES.FAVORITES,
-                element: <Favorites />
-            }
+            // {
+            //     path: ROUTES.SEARCH,
+            //     element: <Search />
+            // },
+            // {
+            //     path: ROUTES.REVIEWS,
+            //     element: <Reviews />
+            // },
+            // {
+            //     path: ROUTES.FAVORITES,
+            //     element: <Favorites />
+            // }
         ]
     }
 ]);
