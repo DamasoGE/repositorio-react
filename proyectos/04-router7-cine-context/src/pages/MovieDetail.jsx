@@ -1,16 +1,27 @@
 import { Link, useParams } from "react-router-dom";
-import { getImageUrl, getMovieDetails } from "../services/tmdb";
+import { getImageUrl, getMovieDetails, getMovieVideos } from "../services/tmdb";
 import { useFetch } from "../hooks/useFetch";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import { useEffect, useState } from "react";
 
 const MovieDetail = () => {
 
   const { id } = useParams();
 
+  const [videos, setVideos] = useState([])
+
   const { data, loading, error } = useFetch(
     () => getMovieDetails(Number(id)),
     [id]
   );
+
+  useEffect( () => {
+    const fetchVideos = async () =>{
+      setVideos(await getMovieVideos(id));
+    }
+    fetchVideos();
+  }, [id])
+  
 
   if (error) {
     return (
@@ -33,8 +44,9 @@ const MovieDetail = () => {
   return (
     <>
       <article className="max-4-xl mx-auto">
+        {console.log(data)}
         {/* Header con imagen de fondo */}
-        <header className="relative h-96 mb-8">
+        <header className="relative h-96 mb-2">
           <img 
             className="w-full h-full object-cover rounded-lg"
             src={getImageUrl(data?.backdrop_path, "original")}
@@ -50,9 +62,34 @@ const MovieDetail = () => {
           </div>
 
         </header>
+
+        <div className="flex justify-center">
+            {data?.genres.map(genre=>(
+              <p className="bg-sky-900 text-white mx-2 px-3 py-1 rounded-full text-sm" key={genre.id}>{genre.name}</p>
+            ))}
+        </div>
+
+        <div className=" m-2 p-2 flex flex-col items-center">
+          <h1 className="mb-4 text-2xl font-semibold">Sinopsis</h1>
+          <p className="max-w-3xl">{data.overview}</p>
+        </div>
+
+        <div className="m-2 p-2 flex flex-col items-center">
+          <h1 className="mb-4 text-2xl font-semibold">Trailer</h1>
+            <iframe
+              className="w-full max-w-3xl h-64 md:h-96 rounded-lg shadow-lg"
+              src={`https://www.youtube.com/embed/${videos.results[0].key}`}
+              title="Tráiler de la película"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+        </div>
+
+
+
       </article>
 
-      <div> {data?.title} </div>
+
     </>
 
   )
