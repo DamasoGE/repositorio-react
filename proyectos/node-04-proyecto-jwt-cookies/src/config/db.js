@@ -1,6 +1,6 @@
 // gestiono la conexión con la base de datos MONGODB
 import mongoose from 'mongoose';
-import { MONGODB_URI } from './config';
+import { MONGODB_URI } from './config.js';
 
 export const connectDB = async () => {
     try {

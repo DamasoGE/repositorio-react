@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config/config";
+import { JWT_SECRET } from "../config/config.js";
 
 //middleware para verificar el token
 
-const authMiddleware = async (req, res, next)=>{
+export const authMiddleware = async (req, res, next)=>{
     //extraemos el token de la cookie
     try {
         const token = req.cookie.token;
