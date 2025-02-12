@@ -57,9 +57,8 @@ const FavoritesPage = () => {
                 >
                   Eliminar de Favoritos
                 </button>
-                
                   <Link 
-                    to={`${ROUTES.SEARCH}/${pokemon.name}`}
+                    to={ROUTES.POKEMON_DETAIL.replace(":name", pokemon.name)}
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-800"
                   > 
                     Ver detalles 

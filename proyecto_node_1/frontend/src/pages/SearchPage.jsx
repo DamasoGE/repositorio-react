@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner"
+import { ROUTES } from "../routes/paths";
 
 const api = import.meta.env.VITE_BACKEND_ENDPOINT;
 
@@ -13,13 +14,12 @@ const SearchPage = () => {
 
     //busqueda de nombre en la api
     try {
-      const response = await fetch(`${api}/pokemon/${search}`)
-      console.log(`${api}/pokemon/${search}`);
+      const response = await fetch(`${api}/pokemon/${search.toLocaleLowerCase()}`)
       if(!response.ok){
         throw new Error("Pokemon no encontrado")
       }
       const data = await response.json();
-      navigate(`/search/${search.toLocaleLowerCase()}`)
+      navigate(`${ROUTES.POKEMON_DETAIL.replace(":name", search.toLocaleLowerCase())}`)
     } catch (error) {
       toast.error("Pokemon no encontrado", error, {
         style: {
