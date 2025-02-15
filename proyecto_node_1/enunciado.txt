@@ -1,9 +1,0 @@
-1. crear un backend en node que haga un fetching a la api de los pokemon que guarde en un endpoint
-el get de los 20 primeros pokemon en la base de datos que queramos.
-2. crear un .env con la url de la api
-3. Puerto 4000
-4. Cuando añada a favoritos quiero que se almacene en la base de datos
-
-DOCKERIZAR TANTO EL FRONTEND Y EL BACKEND
-
-ENTREGAR EL MARTES 4

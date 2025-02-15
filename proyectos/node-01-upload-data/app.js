@@ -1,30 +1,35 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
-import uploadRoutes from "./routes/uploadRoutes.js"
+// app.js
+import express from "express";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
-const app = express(); //Creamos instancia de express
+const app = express();
 
-const __filename = fileURLToPath(import.meta.url); //Ruta del directorio actual
-const __dirname = path.dirname(__filename) //Obtenemos el directorio del fichero
+// Obtener la ruta absoluta de la carpeta actual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-//ruta de la carpeta uploads
-const uploadDir = path.join(__dirname, "uploads");
+// Ruta de la carpeta "uploads"
+const uploadsDir = path.join(__dirname, "uploads");
 
-//comprobacion si la carpeta existe y si no la creamos
-if(!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir)
-    console.log(`Carpeta uploads ${uploadDir} creada correctamente`);
+// Verificar si la carpeta "uploads" existe, si no, crearla
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log(`Carpeta "${uploadsDir}" creada exitosamente.`);
+} else {
+  console.log(`Carpeta "${uploadsDir}" ya existe.`);
 }
 
+// Servir archivos estáticos (como el HTML)
+app.use(express.static(path.join(__dirname, "public")));
 
-// middleware para servir los archivos estáticos html.
-app.use(express.static(path.join(__dirname,'public')));
+// Usar las rutas para manejar uploads/files
+app.use("/uploads", uploadRoutes);
 
-//asociar la carpeta para la subida de archivos en el endpoint /uploads/files
-app.use('/uploads/files', uploadRoutes)
-
-//configuramos el puerto
+// Configuramos el puerto donde va a escuchar el servidor
 const PORT = 3000;
-app.listen(PORT,()=>console.log(`Servidor corriendo en el puerto ${PORT}`))
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});

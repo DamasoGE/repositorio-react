@@ -1,78 +1,64 @@
+// Obtener referencias
 const uploadForm = document.getElementById("uploadForm");
 const fileList = document.getElementById("fileList");
 
-//funcion para subir archivos
+// Función para listar los archivos subidos
+async function fetchFiles() {
+  const response = await fetch("/uploads");
+  if (!response.ok) {
+    console.error("Error al obtener los archivos");
+    return;
+  }
+  const files = await response.json();
+  fileList.innerHTML = ""; // Limpiar la lista antes de renderizar
 
-const fetchFiles = async () =>{
-    try {
-        const response = await fetch("/uploads")
+  // Renderizar los archivos en la lista
+  files.forEach((file) => {
+    const li = document.createElement("li");
+    li.className =
+      "flex justify-between items-center bg-gray-100 p-2 rounded-lg shadow-sm";
+    li.innerHTML = `
+      <span>${file}</span>
+      <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600" data-filename="${file}">Eliminar</button>
+    `;
+    fileList.appendChild(li);
+  });
 
-        if(!response.ok){
-            throw new Error("Error en la respuesta");
-        }
-        
-        const files = await response.json();
-
-        files.forEach( file => {
-            const li = document.createElement("li");
-            li.className = "flex items-center justify-between p-2 bg-gray-200 border-gray-400 rounded-lg shadow-md"
-            li.innerHTML = `
-            <span>${file}</span>
-            <button class="bg-red-500 text-white px-4 py-3 rounded-lg hover: bg-red-700" data-file=${file}>Eliminar</button>
-            `;
-            
-            fileList.appendChild(li);
-        })
-        
-    } catch (error) {
-        console.log("Error: " + error);
-    }
-
-    fileList.innerHTML=""; //Limpiamos la lista antes de renderizar
-
-}
-
-const deleteFiles = () =>{
-    document.querySelectorAll("button[data-file]").forEach((button)=>{
-            button.addEventListener("click", async(event)=>{
-                const file = event.target.dataset.filename;
-                await deleteFile(file); //hay que crear la función delete
-
-                fetchFiles();
-            })
-    })
-}
-
-
-uploadForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(uploadForm); //abre una ventana de selección de archivo
-
-    const response = await fetch("/uploads", {
-        method: "POST",
-        body: formData
+  // Agregar eventos de eliminación
+  document.querySelectorAll("button[data-filename]").forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const fileName = e.target.dataset.filename;
+      await deleteFile(fileName);
+      fetchFiles(); // Actualizar la lista
     });
-
-    if(!response.ok){
-        throw new Error("Error en la respuesta");
-        return;
-    }
-
-    uploadForm.reset();
-
-    fetchFiles();
-})
-
-
-async function deleteFile(file){ //hay que hacerlo
-
-    const response = await fetch(`/uploads/${file}`, {
-        method: "DELETE"
-    });
-
+  });
 }
 
-document.addEventListener("DOMContentLoaded", () =>{
-    fetchFiles();
-})
+// Función para eliminar archivo
+async function deleteFile(fileName) {
+  const response = await fetch(`/uploads/${fileName}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    console.error(`Error al eliminar el archivo: ${fileName}`);
+  }
+}
+
+// Manejador de envío del formulario de subida
+uploadForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(uploadForm);
+  const response = await fetch("/uploads", {
+    method: "POST",
+    body: formData,
+  });
+  if (response.ok) {
+    uploadForm.reset(); // Limpiar el formulario
+    fetchFiles(); // Actualizar la lista
+  } else {
+    console.error("Error al subir el archivo");
+  }
+});
+
+// Cargar la lista de archivos al cargar la página
+document.addEventListener("DOMContentLoaded", fetchFiles);

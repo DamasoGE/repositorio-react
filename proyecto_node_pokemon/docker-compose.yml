@@ -1,0 +1,51 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules #Evita que el contenedor utilice el node modules de la maquina windows
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Activa polling para asegurar detección de cambios en Docker
+    networks:
+      - app-network
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules #Evita que el contenedor utilice el node modules de la maquina windows
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Activa polling para asegurar detección de cambios en Docker
+    networks:
+      - app-network
+  database:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - app-network
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
