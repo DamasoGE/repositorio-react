@@ -1,39 +1,20 @@
-# Proyecto Upload DATA en Node Js
+ # UPLOAD NODE
+ #### Francisco Dámaso Giménez Escudero
+ 
+ ### Como usar esta aplicación:
 
-## **1. Estructura del proyecto**
+- Se debe tener Docker y Docker-Compose
+- Levantar los servicios con docker-compose up --build
+- Acceder en tu navegador a la dirección: http://localhost:3000/
 
-La estructura del proyecto sigue igual:
+### BACKEND/FRONTEND (NODE)
+(desplegado sobre alpine-23)
 
-```bash
-upload-project/
-├── controllers/
-│   └── uploadController.js
-├── public/
-│   └── index.html
-├── routes/
-│   └── uploadRoutes.js
-├── uploads/
-│   └── (aquí se guardarán los archivos subidos)
-├── app.js
-└── package.json
-```
+El backend se ocupa de proporcionar mediante una carpeta public los archivos que el navegador necesita para interactuar con él.
 
----
+El backend está desplegado mediante express con las siguientes dependencidas:
+- express: framework minimalista que permite generar un servidor y servicio de rutas de forma sencilla.
+- charjs: para generar gráficos dinámicos a partir de datos.
+- tailwind: para generar estilos a traves de clases en html.
 
-## **2. Implementación del proyecto**
-
-### **2.1 Inicializa el proyecto**
-
-Ejecuta estos comandos en la terminal:
-
-```bash
-mkdir upload-project
-cd upload-project
-npm init -y
-```
-
-### **2.2 Instala dependencias**
-
-```bash
-npm install express multer
-```
+NOTA: Los archivos solo pueden tener 50 caracteres en el nombre para evitar que se salgan de los límites.
