@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
-  const api = import.meta.env.VITE_BACKEND_API;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
 
@@ -20,10 +18,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+    <div className="w-full flex justify-center items-center">
+      <div className="min-w-xl bg-white shadow-lg rounded-xl p-6">
         <h2 className="text-2xl font-bold text-center mb-4">Iniciar Sesión</h2>
-        {message && <p className="text-center text-red-500">{message}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block font-medium text-gray-700">Nombre de Usuario</label>
@@ -49,13 +46,13 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-rose-700 text-white p-3 rounded-lg font-semibold hover:bg-rose-500 transition"
+            className="w-full bg-rose-700 text-white p-3 rounded-lg font-semibold hover:bg-rose-500 transition mb-5"
           >
             Iniciar Sesión
           </button>
         </form>
         <Link to="/register" className="text-blue-600">
-        ¡Registrate Ahora
+        ¡Registrate Ahora!
         </Link>
       </div>
     </div>

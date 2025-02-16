@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
@@ -13,7 +13,7 @@ const Register = () => {
       const response = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usernameLowerCase, password }),
+        body: JSON.stringify({ username: usernameLowerCase, password }),
       });
 
       const data = await response.json();
@@ -23,13 +23,13 @@ const Register = () => {
         setMessage(data.message);
       }
     } catch (error) {
-      setMessage("Error al conectar con el servidor");
+      setMessage("Error al conectar con el servidor:", error);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+    <div className="w-full flex justify-center items-center">
+      <div className="min-w-xl bg-white shadow-lg rounded-xl p-6">
         <h2 className="text-2xl font-bold text-center mb-4">Registro</h2>
         {message && <p className="text-center text-red-500">{message}</p>}
         <form onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="w-full bg-rose-700 text-white p-3 rounded-lg font-semibold hover:bg-rose-500 transition mb-5"
           >
             Registrarse
           </button>

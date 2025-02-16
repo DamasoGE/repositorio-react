@@ -27,7 +27,7 @@ const RootLayout = () => {
 
   return (
     // Contenedor principal
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       
       <nav className="bg-sky-900 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
@@ -73,12 +73,12 @@ const RootLayout = () => {
       </nav>
       
 
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      <main className="flex-1 flex px-4 py-6">
         {/* Outlet */}
         <Outlet />
       </main>
       {/* pie de página */}
-      <footer className="bg-sky-950 text-white mt-auto">
+      <footer className="bg-sky-900 text-white mt-auto">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <p className="text-center">Videoclub © 2025</p>
         </div>

@@ -10,11 +10,12 @@ export const IMAGES_SIZES = {
 
 // ------------- FUNCIONES QUE VOY A CREAR PARA LA API -------------
 // función para obtener la url de una imagen
-// le paso un path : /sssss
+// le paso un path : https://image.tmdb.org/t/p/original/zo8CIjJ2nfNOevqNajwMRO6Hwka.jpg
 export const getImageUrl = (path, size = IMAGES_SIZES.POSTER) => {
   if (!path) return "/placeholder-movie.jpg";
   return `${VITE_BASE_IMAGE_URL}/${size}${path}`;
 };
+
 
 const fetchFromAPI = async (endpoint, options = {}) => {
   try {
@@ -35,14 +36,14 @@ const fetchFromAPI = async (endpoint, options = {}) => {
 };
 
 // función para obtener las películas populares
-
+//Direccion completa: https://api.themoviedb.org/3/movie/popular?api_key=4fd5df499036cbfd709e9051697545b8&language=es-ES&page=1
 export const getPopularMovies = async (page = 1) => {
   // /movie/popular
   return fetchFromAPI("/movie/popular", { page });
 };
 
 // detalles de las películas
-
+// ejemplo: https://api.themoviedb.org/3/movie/100?api_key=4fd5df499036cbfd709e9051697545b8&language=es-ES
 export const getMovieDetails = async (id) => {
   return fetchFromAPI(`/movie/${id}`);
 };

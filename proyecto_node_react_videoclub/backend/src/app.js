@@ -4,7 +4,9 @@ import express from "express";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import movieRoutes from "./routes/movieRoutes.js";
 import { FRONTEND_URL } from "./config/config.js";
+import { fetchAllDataMovies } from "./utils/fetchMovies.js";
 
 const app = express();
 
@@ -34,11 +36,12 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// Conectar a MongoDB
-connectDB();
+//conecta a la base de datos y coge las películas de la api de tmdb
+const movieDB = await fetchAllDataMovies();
 
 // Rutas
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/movies", movieRoutes)
 
 export default app;
