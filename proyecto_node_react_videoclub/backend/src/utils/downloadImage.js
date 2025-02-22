@@ -19,9 +19,6 @@ const downloadImage = (reqUrl, nameImg) =>{
     responseType: "stream"
   }).then(res => {
     res.data.pipe(fs.createWriteStream(dir));
-    res.data.on("end", () => {
-      console.log("download complete");
-    });
   });
 
 }

@@ -11,7 +11,7 @@ const movieSchema = new mongoose.Schema({
   runtime: {type: String},
   release_date: {type: Date},
   genres: {type: [genreSchema]},
-  overwiew: {type: String},
+  overview: {type: String},
   vote_average: {type: Number},
   popularity: {type: Number},
   backdrop_path: {type: String},

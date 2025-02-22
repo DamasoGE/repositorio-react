@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const api = import.meta.env.VITE_BACKEND_API;
+
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +12,7 @@ const Register = () => {
     e.preventDefault();
     const usernameLowerCase = username.toLocaleLowerCase();
     try {
-      const response = await fetch("http://localhost:3000/api/auth/register", {
+      const response = await fetch(`${api}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: usernameLowerCase, password }),

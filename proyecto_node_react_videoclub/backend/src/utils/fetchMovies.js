@@ -37,11 +37,11 @@ export const fetchAllDataMovies = async () => {
         const urlBackdrop =`${IMAGE_URL}/original/${movie.backdrop_path}`
         const urlPoster = `${IMAGE_URL}/w500/${movie.poster_path}`
 
-        const backdrop_path = `../../public/img/${movie.id}-backdrop.jpg`
-        const poster_path = `../../public/img/${movie.id}-poster.jpg`
+        const backdrop_path = `${movie.id}-backdrop.jpg`
+        const poster_path = `${movie.id}-poster.jpg`
 
-        downloadImage(urlBackdrop,backdrop_path);
-        downloadImage(urlPoster,poster_path);
+        downloadImage(urlBackdrop,`../../public/img/${backdrop_path}`);
+        downloadImage(urlPoster,`../../public/img/${poster_path}`);
 
         const genres = movie.genres.map((genre)=> {
             return { name: genre.name}
@@ -54,8 +54,6 @@ export const fetchAllDataMovies = async () => {
         }
 
         const videosData = await videosResponse.json();
-        console.log(movie.title + movie.id);
-        console.log(videosData.results[0])
 
         let video = null;
         if(videosData.results.length > 0){
@@ -71,7 +69,7 @@ export const fetchAllDataMovies = async () => {
                 runtime: movie.runtime,
                 release_date: movie.release_date,
                 genres: genres,
-                overwiew: movie.overwiew,
+                overview: movie.overview,
                 vote_average: movie.vote_average,
                 popularity: movie.popularity,
                 backdrop_path: backdrop_path,
